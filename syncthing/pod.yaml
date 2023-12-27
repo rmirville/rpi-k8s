@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: syncthing
   labels:
-    name: syncthing
+    app.kubernetes.io/name: syncthing
 spec:
   containers:
   - name: syncthing
