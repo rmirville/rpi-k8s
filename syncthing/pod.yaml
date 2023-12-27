@@ -13,19 +13,19 @@ spec:
         memory: "256Mi"
         cpu: "500m"
     ports:
-      - name: syncthing-port-http
+      - name: http
         containerPort: 8384
-      - name: syncthing-port-files-tcp
+      - name: files-tcp
         containerPort: 22000
         protocol: TCP
-      - name: syncthing-port-files-quic
+      - name: files-quic
         containerPort: 22000
         protocol: UDP
-      - name: syncthing-port-discovery
+      - name: discovery
         containerPort: 21027
         protocol: UDP
     volumeMounts:
-      - name: syncthing-volume-mount
+      - name: syncthing-volume
         mountPath: /var/syncthing
   volumes:
     - name: syncthing-volume
