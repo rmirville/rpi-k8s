@@ -1,0 +1,7 @@
+resources:
+- pv.yaml
+- svc.yaml
+- svc-http.yaml
+- deploy.yaml
+- pvc.yaml
+- ing.yaml
