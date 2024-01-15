@@ -1,11 +1,15 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: syncthing-persistent-volume-claim
+  name: syncthing-pvc
 spec:
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
+  storageClassName: local-storage
   volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: syncthing

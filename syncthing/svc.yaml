@@ -7,7 +7,17 @@ spec:
   selector:
     app.kubernetes.io/name: syncthing
   ports:
-  - name: http
-    port: 8384
-    targetPort: http
-    nodePort: 30080
+  - name: files-tcp
+    nodePort: 32000
+    port: 22000
+    targetPort: files-tcp
+    protocol: TCP
+  - name: files-quic
+    nodePort: 32000
+    port: 22000
+    targetPort: files-quic
+    protocol: UDP
+  - name: discovery
+    nodePort: 31027
+    port: 21027
+    protocol: UDP

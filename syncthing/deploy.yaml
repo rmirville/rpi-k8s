@@ -35,7 +35,13 @@ spec:
         volumeMounts:
         - name: syncthing-volume
           mountPath: /var/syncthing
+          readOnly: false
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "Always"
       volumes:
       - name: syncthing-volume
         persistentVolumeClaim:
-          claimName: syncthing-persistent-volume-claim
+          claimName: syncthing-pvc

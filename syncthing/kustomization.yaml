@@ -1,6 +1,8 @@
 resources:
+- storage-class.yaml
 - pv.yaml
-- svc-http.yaml
-- deploy.yaml
 - pvc.yaml
+- svc-http.yaml
+- svc.yaml
+- deploy.yaml
 - ing.yaml
