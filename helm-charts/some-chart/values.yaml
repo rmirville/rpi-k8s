@@ -1,0 +1,6 @@
+# Default values for some-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+importedValue: "Greetings, Planet"
+appName: "syncthing"

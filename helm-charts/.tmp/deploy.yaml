@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.appName}}
+  labels:
+    app.kubernetes.io/name: {{.Values.appName}}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{.Values.appName}}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{.Values.appName}}
+    spec:
+      containers:
+        - name: {{.Values.appName}}
+          image: {{.Values.appName}}"/"{{.Values.appName}}":"{{.Chart.AppVersion}}
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          ports:
+            - name: http
+              containerPort: 8384
+            - name: files-tcp
+              containerPort: 22000
+              protocol: TCP
+            - name: files-quic
+              containerPort: 22000
+              protocol: UDP
+            - name: discovery
+              containerPort: 21027
+              protocol: UDP
+          volumeMounts:
+            - name: {{.Values.appName}}-volume
+              mountPath: /var/{{.Values.appName}}
+              readOnly: false
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "Always"
+      volumes:
+        - name: {{.Values.appName}}-volume
+          persistentVolumeClaim:
+            claimName: {{.Values.appName}}-pvc
