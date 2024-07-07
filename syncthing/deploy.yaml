@@ -14,34 +14,37 @@ spec:
         app.kubernetes.io/name: syncthing
     spec:
       containers:
-      - name: syncthing
-        image: syncthing/syncthing:latest
-        resources:
-          limits:
-            memory: "256Mi"
-            cpu: "500m"
-        ports:
-        - name: http
-          containerPort: 8384
-        - name: files-tcp
-          containerPort: 22000
-          protocol: TCP
-        - name: files-quic
-          containerPort: 22000
-          protocol: UDP
-        - name: discovery
-          containerPort: 21027
-          protocol: UDP
-        volumeMounts:
-        - name: syncthing-volume
-          mountPath: /var/syncthing
-          readOnly: false
+        - name: syncthing
+          image: syncthing/syncthing:latest
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          ports:
+            - name: http
+              containerPort: 8384
+            - name: files-tcp
+              containerPort: 22000
+              protocol: TCP
+            - name: files-quic
+              containerPort: 22000
+              protocol: UDP
+            - name: discovery
+              containerPort: 21027
+              protocol: UDP
+          volumeMounts:
+            - name: syncthing-volume
+              mountPath: /var/syncthing
+              readOnly: false
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: "Always"
       volumes:
-      - name: syncthing-volume
-        persistentVolumeClaim:
-          claimName: syncthing-pvc
+        - name: syncthing-volume
+          persistentVolumeClaim:
+            claimName: syncthing-pvc
+      envFrom:
+        - configMapRef:
+            name: syncthing-config-map

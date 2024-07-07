@@ -8,17 +8,17 @@ spec:
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: 5Gi
+    storage: 1Gi
   local:
     path: /var/syncthing
   nodeAffinity:
     required:
       nodeSelectorTerms:
-      - matchExpressions:
-        - key: app.kubernetes.io/name
-          operator: In
-          values:
-          - syncthing
+        - matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+                - syncthing
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   volumeMode: Filesystem

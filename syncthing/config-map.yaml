@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: syncthing-config-map
+  labels:
+data:
+  SOME_VARIABLE: "some-value"
